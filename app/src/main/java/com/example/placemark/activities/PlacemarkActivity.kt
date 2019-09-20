@@ -11,7 +11,7 @@ import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
-    var placemark = PlacemarkModel()
+    val placemarks = ArrayList<PlacemarkModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +19,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         info("Placemark Activity started..")
 
         btnAdd.setOnClickListener() {
+            val placemark = PlacemarkModel()
             placemark.title = placemarkTitle.text.toString()
+            placemarks.add(placemark)
+
             if (placemark.title.isNotEmpty()) {
-                info("Add button pressed: $placemark")
+                info("Add button pressed: $placemarks")
             } else {
                 toast("Please enter a title..")
             }
