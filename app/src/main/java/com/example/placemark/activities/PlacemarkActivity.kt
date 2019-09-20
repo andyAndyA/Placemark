@@ -21,12 +21,14 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             val placemark = PlacemarkModel()
             placemark.title = placemarkTitle.text.toString()
-            placemarks.add(placemark)
+            placemark.description = placemarkDescription.text.toString()
 
-            if (placemark.title.isNotEmpty()) {
+            if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
+                placemarks.add(placemark)
+
                 info("Add button pressed: $placemarks")
             } else {
-                toast("Please enter a title..")
+                toast("Please enter a title and description..")
             }
         }
     }
