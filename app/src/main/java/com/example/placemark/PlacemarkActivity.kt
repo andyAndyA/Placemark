@@ -5,6 +5,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
@@ -14,7 +15,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         info("Placemark Activity started..")
 
         btnAdd.setOnClickListener() {
-            info("Add button pressed..")
+            val placemarkTitle = placemarkTitle.text.toString()
+            if (placemarkTitle.isNotEmpty()) {
+                info("Add button pressed: $placemarkTitle")
+            } else {
+                toast("Please enter a title..")
+            }
         }
     }
 }
