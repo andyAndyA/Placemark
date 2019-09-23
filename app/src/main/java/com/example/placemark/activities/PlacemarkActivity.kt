@@ -2,6 +2,7 @@ package com.example.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.R
 import kotlinx.android.synthetic.main.activity_placemark.*
@@ -11,22 +12,25 @@ import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
-    val placemarks = ArrayList<PlacemarkModel>()
+    var placemark = PlacemarkModel()
+    var app : MainApp ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark)
-        info("Placemark Activity started..")
+        app = application as MainApp
 
         btnAdd.setOnClickListener() {
-            val placemark = PlacemarkModel()
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                placemarks.add(placemark.copy())
+                app!!.placemarks.add(placemark.copy())
 
-                info("Add button pressed: $placemarks")
+                info("Add button pressed")
+                for (i in app!!.placemarks.indices) {
+                    info("Placemark[$i]: ${app!!.placemarks[i]}")
+                }
             } else {
                 toast("Please enter a title and description..")
             }
