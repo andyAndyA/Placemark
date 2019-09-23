@@ -2,6 +2,7 @@ package com.example.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.R
@@ -19,6 +20,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark)
         app = application as MainApp
+
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
 
         btnAdd.setOnClickListener() {
             placemark.title = placemarkTitle.text.toString()
@@ -38,5 +42,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 toast("Please enter a title and description..")
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_placemark, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
