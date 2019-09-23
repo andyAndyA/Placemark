@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.placemark.main.MainApp
 import com.example.placemark.R
 import com.example.placemark.models.PlacemarkAdapter
-import kotlinx.android.synthetic.main.activity_placemark.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.startActivityForResult
 
