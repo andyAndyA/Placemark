@@ -2,10 +2,7 @@ package com.example.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.placemark.main.MainApp
@@ -15,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_placemark.view.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import kotlinx.android.synthetic.main.card_placemark.view.*
 import kotlinx.android.synthetic.main.card_placemark.view.placemarkTitle
+import org.jetbrains.anko.startActivityForResult
 
 class PlacemarkListActivity : AppCompatActivity() {
 
@@ -36,6 +34,13 @@ class PlacemarkListActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

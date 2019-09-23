@@ -31,6 +31,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 for (i in app.placemarks.indices) {
                     info("Placemark[$i]: ${app.placemarks[i]}")
                 }
+
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
             } else {
                 toast("Please enter a title and description..")
             }
