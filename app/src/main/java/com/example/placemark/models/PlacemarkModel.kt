@@ -1,4 +1,4 @@
-package com.example.models
+package com.example.placemark.models
 
 data class PlacemarkModel(
     var title: String = "",

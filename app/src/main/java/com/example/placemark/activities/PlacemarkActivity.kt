@@ -2,7 +2,7 @@ package com.example.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.models.PlacemarkModel
+import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.R
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
@@ -24,7 +24,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.description = placemarkDescription.text.toString()
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                placemarks.add(placemark)
+                placemarks.add(placemark.copy())
 
                 info("Add button pressed: $placemarks")
             } else {
