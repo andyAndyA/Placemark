@@ -39,11 +39,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
                 app.placemarks.create(placemark.copy())
 
-                info("Add button pressed")
+                info(getString(R.string.success_addPlacemark))
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
-                toast("Please enter a title and description..")
+                toast(getString(R.string.error_requireTitleDescription))
             }
         }
     }
