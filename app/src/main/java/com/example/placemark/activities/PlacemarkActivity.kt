@@ -31,11 +31,13 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.description = placemarkDescription.text.toString()
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                app.placemarks.add(placemark.copy())
+                app.placemarks.create(placemark.copy())
 
                 info("Add button pressed")
-                for (i in app.placemarks.indices) {
-                    info("Placemark[$i]: ${app.placemarks[i]}")
+
+                val placemarks = app.placemarks.findAll()
+                for (i in placemarks.indices) {
+                    info("Placemark[$i]: ${placemarks[i]}")
                 }
 
                 setResult(AppCompatActivity.RESULT_OK)
