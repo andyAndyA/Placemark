@@ -26,10 +26,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
+        var updating = false
         if (intent.hasExtra("placemark_edit")) {
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
+            updating = true
         }
 
         btnAdd.setOnClickListener() {
@@ -37,7 +39,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.description = placemarkDescription.text.toString()
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                app.placemarks.create(placemark.copy())
+                if (updating) {
+                    app.placemarks.update(placemark.copy())
+                } else {
+                    app.placemarks.create(placemark.copy())
+                }
 
                 info(getString(R.string.success_addPlacemark))
                 setResult(AppCompatActivity.RESULT_OK)
