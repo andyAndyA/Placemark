@@ -40,12 +40,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 app.placemarks.create(placemark.copy())
 
                 info("Add button pressed")
-
-                val placemarks = app.placemarks.findAll()
-                for (i in placemarks.indices) {
-                    info("Placemark[$i]: ${placemarks[i]}")
-                }
-
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
