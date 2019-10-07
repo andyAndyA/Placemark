@@ -9,6 +9,7 @@ import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.R
 import com.example.placemark.helpers.readImage
+import com.example.placemark.helpers.readImageFromPath
 import com.example.placemark.helpers.showImagePicker
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
@@ -36,6 +37,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
+            placemarkImage.setImageBitmap((readImageFromPath(this, placemark.image)))
 
             updating = true
             btnAdd.text = getString(R.string.button_savePlacemark)
