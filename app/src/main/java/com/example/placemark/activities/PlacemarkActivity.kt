@@ -54,6 +54,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 toast(getString(R.string.error_requireTitleDescription))
             }
         }
+
+        chooseImage.setOnClickListener {
+            info("Select image")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
