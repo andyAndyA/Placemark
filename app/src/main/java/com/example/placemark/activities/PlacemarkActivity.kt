@@ -1,5 +1,6 @@
 package com.example.placemark.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -7,6 +8,7 @@ import android.view.MenuItem
 import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.R
+import com.example.placemark.helpers.readImage
 import com.example.placemark.helpers.showImagePicker
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
@@ -73,5 +75,17 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             R.id.item_cancel -> startActivityForResult<PlacemarkListActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            IMAGE_REQUEST -> {
+                if (data != null) {
+                    placemark.image = data.getData().toString()
+                    placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+        }
     }
 }
