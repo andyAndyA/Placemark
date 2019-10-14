@@ -41,7 +41,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
             updating = true
             btnAdd.text = getString(R.string.button_savePlacemark)
-            chooseImage.text = getString(R.string.button_changeImage)
+            chooseImage.setText(R.string.change_placemark_image)
         }
 
         btnAdd.setOnClickListener() {
@@ -87,6 +87,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     placemark.image = data.getData().toString()
                     placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.change_placemark_image)
                 }
             }
         }

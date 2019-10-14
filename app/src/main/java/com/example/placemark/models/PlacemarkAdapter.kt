@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.placemark.R
+import com.example.placemark.helpers.readImageFromPath
 import kotlinx.android.synthetic.main.card_placemark.view.*
 
 interface PlacemarkListener {
@@ -36,7 +37,8 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
         fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
             itemView.placemarkTitle.text = placemark.title
             itemView.description.text = placemark.description
-            itemView.setOnClickListener{ listener.onPlacemarkClick(placemark) }
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, placemark.image))
+            itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
         }
     }
 }
