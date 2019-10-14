@@ -39,6 +39,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
             placemarkImage.setImageBitmap((readImageFromPath(this, placemark.image)))
+            location = placemark.location
 
             updating = true
             btnAdd.text = getString(R.string.button_savePlacemark)
@@ -48,6 +49,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
+            placemark.location = location
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
                 if (updating) {
