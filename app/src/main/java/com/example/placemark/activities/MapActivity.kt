@@ -14,7 +14,7 @@ import com.example.placemark.models.Location
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var mMap: GoogleMap
+    private lateinit var map: GoogleMap
     var location = Location()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +29,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        map = googleMap
 
         val loc = LatLng(location.lat, location.lng)
-        mMap.addMarker(MarkerOptions().position(loc).title("Default Marker"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        val options = MarkerOptions()
+            .title("Placemark")
+            .snippet("GPS: " + loc.toString())
+            .draggable(true)
+            .position(loc)
+
+        map.addMarker(options)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 }
