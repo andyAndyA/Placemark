@@ -11,6 +11,7 @@ import com.example.placemark.R
 import com.example.placemark.helpers.readImage
 import com.example.placemark.helpers.readImageFromPath
 import com.example.placemark.helpers.showImagePicker
+import com.example.placemark.models.Location
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.*
 
@@ -65,7 +66,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         }
 
         placemarkLocation.setOnClickListener {
-            startActivity(intentFor<MapActivity>())
+            val location = Location(52.245696, -7.139102, 15f)
+            startActivity(intentFor<MapActivity>().putExtra("location", location))
         }
     }
 
