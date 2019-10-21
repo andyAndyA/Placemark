@@ -39,7 +39,15 @@ class PlacemarkJSONStore: PlacemarkStore, AnkoLogger {
     }
 
     override fun update(placemark: PlacemarkModel) {
-        // TODO
+        var foundPlacemark: PlacemarkModel ?= placemarks.find{ p -> p.id === placemark.id }
+        if (foundPlacemark != null) {
+            foundPlacemark.title = placemark.title
+            foundPlacemark.description = placemark.description
+            foundPlacemark.image = placemark.image
+            foundPlacemark.location = placemark.location
+
+            serialize()
+        }
     }
 
     private fun serialize() {
