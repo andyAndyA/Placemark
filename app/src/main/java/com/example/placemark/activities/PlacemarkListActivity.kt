@@ -25,7 +25,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
+        loadPlacemarks()
 
         toolbarMain.title = title
         setSupportActionBar(toolbarMain)
@@ -48,7 +48,16 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        loadPlacemarks()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun loadPlacemarks() {
+        showPlacemarks(app.placemarks.findAll())
+    }
+
+    fun showPlacemarks(placemarks: List<PlacemarkModel>) {
+        recyclerView.adapter = PlacemarkAdapter(placemarks, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 }
