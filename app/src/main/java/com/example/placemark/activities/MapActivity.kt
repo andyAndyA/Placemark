@@ -15,7 +15,7 @@ import com.example.placemark.R
 import com.example.placemark.models.Location
 import com.google.android.gms.maps.model.Marker
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()
@@ -35,6 +35,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map = googleMap
 
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
 
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
@@ -68,5 +69,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker!!.snippet = "GPS: " + loc.toString()
+        return false
     }
 }
