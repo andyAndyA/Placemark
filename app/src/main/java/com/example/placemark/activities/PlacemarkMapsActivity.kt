@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.placemark.R
 
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
+import kotlinx.android.synthetic.main.content_placemark_maps.*
 
 class PlacemarkMapsActivity : AppCompatActivity() {
 
@@ -14,5 +15,6 @@ class PlacemarkMapsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_placemark_maps)
         toolbar.title = title
         setSupportActionBar(toolbar)
+        mapView.onCreate(savedInstanceState)
     }
 }
