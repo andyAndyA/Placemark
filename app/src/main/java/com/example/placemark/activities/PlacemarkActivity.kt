@@ -19,6 +19,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     var placemark = PlacemarkModel()
     lateinit var app : MainApp
+    var edit = false
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
@@ -33,7 +34,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
-        var updating = false
         if (intent.hasExtra("placemark_edit")) {
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
@@ -41,7 +41,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemarkImage.setImageBitmap((readImageFromPath(this, placemark.image)))
             location = placemark.location
 
-            updating = true
+            edit = true
             btnAdd.text = getString(R.string.button_savePlacemark)
             chooseImage.setText(R.string.change_placemark_image)
         }
@@ -52,7 +52,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.location = location
 
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                if (updating) {
+                if (edit) {
                     app.placemarks.update(placemark.copy())
                 } else {
                     app.placemarks.create(placemark.copy())
@@ -77,12 +77,17 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> startActivityForResult<PlacemarkListActivity>(0)
+            R.id.item_delete -> {
+                app.placemarks.delete(placemark)
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
