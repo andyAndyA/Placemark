@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.placemark.main.MainApp
 import com.example.placemark.R
 import com.example.placemark.models.PlacemarkAdapter
@@ -12,6 +13,7 @@ import com.example.placemark.models.PlacemarkListener
 import com.example.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
@@ -24,7 +26,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = layoutManager as RecyclerView.LayoutManager?
         loadPlacemarks()
 
         toolbarMain.title = title
@@ -39,6 +41,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
+            R.id.item_map -> startActivity<PlacemarkMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }
