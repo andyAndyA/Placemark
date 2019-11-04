@@ -20,6 +20,11 @@ class PlacemarkMapsActivity : AppCompatActivity() {
         toolbar.title = title
         setSupportActionBar(toolbar)
         mapView.onCreate(savedInstanceState)
+
+        mapView.getMapAsync {
+            map = it
+            configureMap()
+        }
     }
 
     override fun onDestroy() {
@@ -45,5 +50,9 @@ class PlacemarkMapsActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
+    }
+
+    fun configureMap() {
+        map.uiSettings.isZoomControlsEnabled = true
     }
 }
